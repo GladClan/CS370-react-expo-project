@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Link } from 'expo-router';
-import { link } from 'fs';
 
 export default function App() {
   return (
     <View className="flex-1 items-center justify-center bg-white" style={styles.container}>
       <StatusBar style="auto" />
       <Text className="text-3xl" style={styles.title}>The app title will go here!</Text>
-      <Link href="/profile" style={styles.link}>Go to profile</Link>
+      <Link href="/home" style={styles.link}>Go to Home</Link>
     </View>
   );
 }
