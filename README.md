@@ -2,4 +2,19 @@
 # React Native
 This is the repository you will use to share the code you write while following the React Native tutorial.
 
-Following the [video tutorial by JavaScript Mastery](https://youtu.be/ZBCUegTZF7M?t=5347s)
+Following the [video tutorial by JavaScript Mastery](https://youtu.be/ZBCUegTZF7M?t=6366s)
+
+**Commands to run the application:**
+```npx expo start```
+
+### AppWrite information
+
+This application uses [AppWrite](https://appwrite.io/) for its database and authentification functionality.
+Here is a direct hyperlink to the [appwrite project page](https://cloud.appwrite.io/console/project-6750bc430012b6ceba68/overview/platforms) 
+> *If you're logged in to my accont! Muahahaha!*
+
+[AppWrite Docs](https://github.com/appwrite/sdk-for-react-native)
+
+
+**Package name for the app:**
+> com.jsm.tutorial-application

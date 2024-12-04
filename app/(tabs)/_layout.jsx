@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     gap: 2
   },
   iconImage: {
-    width: 24,
-    height: 24
+    width: 20,
+    height: 20
   },
   iconText: {
     fontSize: 12,

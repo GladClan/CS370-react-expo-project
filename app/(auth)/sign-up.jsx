@@ -8,6 +8,7 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
 import { images } from '../../constants'
+import { createUser } from '../../lib/appwrite'
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -16,6 +17,10 @@ const SignUp = () => {
     password: '',
   })
   const [submitting, setSubmitting] = useState(false)
+
+  const handleSignUp = () => {
+    createUser();
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full" style={styles.safeAreaView}>
@@ -50,7 +55,7 @@ const SignUp = () => {
 
           <CustomButton
             title='Sign Up'
-            handlePress={() => console.log('Sign up')}
+            handlePress={handleSignUp}
             otherStyles="mt-7" 
             isLoading={submitting}
           />

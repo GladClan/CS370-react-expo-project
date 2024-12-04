@@ -17,6 +17,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package":"com.jsm.tutorial-application",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
