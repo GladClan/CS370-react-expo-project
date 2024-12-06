@@ -1,5 +1,5 @@
-import { StyleSheet, Text, FlatList, Image } from 'react-native'
-import { useState }from 'react'
+import { StyleSheet, Text, FlatList, Image, Alert } from 'react-native'
+import { useEffect, useState }from 'react'
 import { RefreshControl, SafeAreaView, View } from 'react-native-web'
 
 import { themeColors } from '../../tailwind.config'
@@ -7,22 +7,28 @@ import { images } from '../../constants'
 import SearchInput from '../../components/serachInput'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
+import { getAllPosts } from '../../lib/appwrite'
+import useAppwrite from '../../lib/useAppwrite'
+import VideoCard from '../../components/VideoCard'
 
 const Home = () => {
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = async () => {
     setRefreshing(true);
-    // recall videos to see if any new videos appear
+    await refetch();
     setRefreshing(false);
   }
+
 
   return (
     <SafeAreaView className={"bg-primary h-full"} style={styles.container}>
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <Text key={item.id} className={"text-3xl text-white"} style={styles.textItems}>{item.id}</Text>
+            <VideoCard video={item}/>
         )}
         ListHeaderComponent={() => (
           <View className={"my-6 px-4 space-y-6"} style={styles.listHeader}>
