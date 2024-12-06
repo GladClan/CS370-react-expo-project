@@ -2,7 +2,7 @@
 # React Native
 This is the repository you will use to share the code you write while following the React Native tutorial.
 
-Following the [video tutorial by JavaScript Mastery](https://youtu.be/ZBCUegTZF7M?t=6366s)
+Following the [video tutorial by JavaScript Mastery](https://youtu.be/ZBCUegTZF7M?t=8882s)
 
 **Commands to run the application:**
 ```npx expo start```
