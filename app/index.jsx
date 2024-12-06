@@ -5,11 +5,16 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-web';
 
+import { useGlobalContext } from '../context/GlobalProvider';
 import { themeColors } from '../tailwind.config';
 import { images } from '../constants';
 import CustomButton from '../components/CustomButton';
 
 export default function App() {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/home" />
+
   return (
     <SafeAreaView className="bg-primary h-full" style={styles.safeAreaView}>
       <ScrollView contentContainerStyle={{height: '100%'}} style={styles.scrollViewContent}>

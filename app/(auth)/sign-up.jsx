@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-web'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { themeColors } from '../../tailwind.config'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
+
+import { setUser, setIsLoggedIn } from '../../context/GlobalProvider'
 
 import { images } from '../../constants'
 import { createUser } from '../../lib/appwrite'
@@ -18,8 +20,30 @@ const SignUp = () => {
   })
   const [submitting, setSubmitting] = useState(false)
 
-  const handleSignUp = () => {
-    createUser();
+  const handleSignUp = async () => {
+    console.log('Submit button clicked')
+    if (!form.userName || !form.email || !form.password) {
+      Alert.alert('error', 'Please fill all fields')
+      return
+    }
+      setSubmitting(true)
+
+      try {
+        console.log('Creating user...')
+        const result = await createUser(form.email, form.password, form.userName)
+        console.log('User created:', result)
+        setUser(result)
+        setIsLoggedIn(true)
+
+        // Set the user to global state...
+
+        router.replace('/home')
+      } catch (error) {
+        Alert.alert('error', error.message)
+        console.log(error)
+      } finally {
+        setSubmitting(false)
+    }
   }
 
   return (

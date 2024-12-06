@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-web'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { themeColors } from '../../tailwind.config'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
 import { images } from '../../constants'
+import { getCurrentUser, signIn } from '../../lib/appwrite'
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -15,6 +17,36 @@ const SignIn = () => {
     password: '',
   })
   const [submitting, setSubmitting] = useState(false)
+
+const { setUser, setIsLoggedIn } = useGlobalContext();
+
+  const handleSignIn = async () => {
+    console.log('Submit button clicked')
+    if (!form.email || !form.password) {
+      Alert.alert('error', 'Please fill all fields')
+      return
+    }
+      setSubmitting(true)
+
+      try {
+        console.log('Signing in user...')
+        await signIn(form.email, form.password)
+        console.log('User signed in')
+
+        const result = await getCurrentUser()
+        setUser(result)
+        setIsLoggedIn(true)
+
+        // Set the user to global state...
+
+        router.replace('/home')
+      } catch (error) {
+        Alert.alert('error', error.message)
+        console.log(error)
+      } finally {
+        setSubmitting(false)
+    }
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full" style={styles.safeAreaView}>
@@ -42,7 +74,7 @@ const SignIn = () => {
 
           <CustomButton
             title='Sign In'
-            handlePress={() => console.log('Sign In')}
+            handlePress={handleSignIn}
             otherStyles="mt-7" 
             isLoading={submitting}
           />

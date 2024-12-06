@@ -13,6 +13,7 @@ const themeColors = {
   gray: {
     100: "#CDCDE0",
   },
+  white: "#fff",
   danger: '#e3342f',
 }
 
