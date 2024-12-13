@@ -2,7 +2,7 @@
 # React Native
 This is the repository you will use to share the code you write while following the React Native tutorial.
 
-Following the [video tutorial by JavaScript Mastery](https://www.youtube.com/watch?v=ZBCUegTZF7M&t=11187s)
+Following the [video tutorial by JavaScript Mastery](https://www.youtube.com/watch?v=ZBCUegTZF7M&t=12241s)
 https://youtu.be/ZBCUegTZF7M?t=10714
 **Commands to run the application:**
 ```npx expo start```
@@ -20,3 +20,9 @@ Here is a direct hyperlink to the [appwrite project page](https://cloud.appwrite
 
 *note to self*
 > use the command ```git pushboth``` to push changes to personal repository and ensign repo.
+
+## To-do's
+| Bug | task | status |
+|-----|-----|-----|
+| Videos don't play | Debug videos code in components/Trending.jsx and components/VideoCard.jsx | |
+| User log-in doesn't work right | Debug between AppWrite and lib/appwrite.js to find out if we can get that working | |

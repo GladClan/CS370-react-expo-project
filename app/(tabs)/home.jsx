@@ -1,11 +1,11 @@
-import { StyleSheet, Text, FlatList, Image, Alert } from 'react-native'
-import { useEffect, useState }from 'react'
+import { StyleSheet, Text, FlatList, Image } from 'react-native'
+import { useState }from 'react'
 import { RefreshControl, SafeAreaView, View } from 'react-native-web'
 
 
 import { themeColors } from '../../tailwind.config'
 import { images } from '../../constants'
-import SearchInput from '../../components/serachInput'
+import SearchInput from '../../components/SearchInput'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite'

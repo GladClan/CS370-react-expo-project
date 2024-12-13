@@ -1,26 +1,36 @@
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native'
 import { useState } from 'react'
 import { icons } from '../constants'
 import { themeColors } from '../tailwind.config'
+import { router, usePathname } from 'expo-router'
 
-const SearchInput = ({ title, value, placeholder, handleChangeText, otherStyles, CSSStyles }) => {
+const SearchInput = ({ value, initialQuery, placeholder, ...props }) => {
+    const pathname = usePathname()
+    const [searchQuery, setSearchQuery] = useState(initialQuery || '')
+
     const [isFocused, setIsFocused] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
-  return (
+
+    return (
     <View className="flex-row border-2 border-black-200 w-full h-16 px-4 bg-black-100 rounded-2xl items-center focus:border-secondary space-x-4" style={[styles.inputContainer, isFocused && styles.inputContainerFocused]}>
         <TextInput
             className="text-base mt-0.5 text-white flex-1 font-pregular"
-            value={value}
+            value={searchQuery}
             placeholder={placeholder}
-            onChangeText={handleChangeText}
-            placeholderTextColor={'#7b7b8b'}
-            secureTextEntry={title === 'Password' && !showPassword}
+            onChangeText={(e) => setSearchQuery(e)}
+            placeholderTextColor={'#cdcde0'}
             style={styles.input}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => {
+                console.log("Searching for", searchQuery)
+                if (!searchQuery) { return Alert.alert('Missing Query', 'Please enter something to search results across database') }
+                if (pathname.startsWith('/search')) { router.setParams({ query: searchQuery }) }
+                else { router.push(`/search/${searchQuery}`) }
+            }}
+        >
             <Image
                 source={icons.search}
                 className={"h-5 w-5"}
