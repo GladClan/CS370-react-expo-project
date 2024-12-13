@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useState } from 'react'
+import { Video, ResizeMode } from 'expo-av'
 
 import { themeColors } from '../tailwind.config'
 import { icons } from '../constants'
@@ -39,7 +40,19 @@ const VideoCard = ({ video: {title, thumbnail, video, creator: { username, avata
             </View>
         </View>
 
-        {play ? (<Text style={{color: themeColors.white}}>Playing</Text>) : (
+        {play ? (
+        <Video 
+          source={{ uri: video.video}}
+          className={"w-full h-60 rounded-xl mt-3"}
+          style={{width: '100%', height: 195, borderRadius: 10, marginTop: 10}}
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls={true}
+          shouldPlay={true}
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) setPlay(false)}
+          }
+        />
+    ) : (
             <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => setPlay(true)}
