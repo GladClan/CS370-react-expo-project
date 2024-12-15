@@ -2,7 +2,7 @@ import { StyleSheet, Text, FlatList, Image } from 'react-native'
 import { useState }from 'react'
 import { RefreshControl, SafeAreaView, View } from 'react-native-web'
 
-
+import { useGlobalContext } from '../../context/GlobalProvider';
 import { themeColors } from '../../tailwind.config'
 import { images } from '../../constants'
 import SearchInput from '../../components/SearchInput'
@@ -13,6 +13,7 @@ import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../../components/VideoCard'
 
 const Home = () => {
+  const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
 
@@ -40,7 +41,7 @@ const Home = () => {
                   Welcome back
                 </Text>
                 <Text className={"text-2xl font-psemibold text-white"} style={styles.welcomeName}>
-                  {"you cutie"}
+                  {user?.username || "you cutie"}
                 </Text>
               </View>
 

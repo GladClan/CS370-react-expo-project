@@ -34,9 +34,7 @@ const SignUp = () => {
         console.log('User created:', result)
         setUser(result)
         setIsLoggedIn(true)
-
-        // Set the user to global state...
-
+        
         router.replace('/home')
       } catch (error) {
         Alert.alert('error', error.message)
